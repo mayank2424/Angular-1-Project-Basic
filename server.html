@@ -1,0 +1,40 @@
+<!doctype html>
+<html ng-app="serverApp">
+  <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.9/angular.min.js"></script>
+
+    <!-- script file -->
+  
+    <script src="server.js"></script>
+    <link rel="stylesheet" href="basic.css">
+  </head>
+  <body>
+       <div ng-controller="serverController">
+           <h2>Get Data:</h2>
+           <button ng-click="getData()">Call Get Data API</button>
+           <input type="number" ng-model="getDataId">
+           <br><span ng-if="loading">Fetching....</span>
+           <div ng-if="dataFetched && !isErr">
+               <p>{{Data}}</p>
+           </div>
+           <div ng->
+
+           </div>
+           <h2 ng-if="clicked">Yes</h2>
+           <button ng-click="test()">test</button>
+       </div>
+
+       <div  ng-controller="serverController">
+           <h2>Post Data</h2>
+           <input type="text" placeholder="title" ng-model="title">
+           <input type="text" placeholder="Enter body text" ng-model="body">
+           <input type="number" ng-model="getDataId">
+           <button ng-click="updateData({title,body})">Post Data</button>
+           <br>
+           <br><span ng-if="loading">Updating....</span>
+           <div ng-if="dataFetched && !isErr">
+               <p>{{Data}}</p>
+           </div>
+       </div>
+  </body>
+</html>

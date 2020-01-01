@@ -1,0 +1,141 @@
+<!doctype html>
+<html ng-app="taskApp">
+  <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.9/angular.min.js"></script>
+
+    <!-- script file -->
+    <script src="ang.js"></script>
+    <script src="basic.js"></script>
+    
+    <link rel="stylesheet" href="basic.css">
+  </head>
+  <body>
+    <!-- <div>
+      <label>Name:</label>
+      <input type="text" ng-model="yourName" placeholder="Enter a name here">
+      <input type="number" ng-model="n1" placeholder="Enter no 2">
+      <input type="number" ng-model="n2" placeholder="Enter no 2">
+      <hr>
+      <h1>Hello {{yourName}}!</h1>
+      <h2>Number 1: {{n1}}</h2>
+      <h2>Number 2: {{n2}}</h2>
+      <span style="color:red">{{n1+n2}}</span>
+      <br>
+      <span ng-if="(n1+n2) < 50">Number is smaller than 50</span>
+    </div> -->
+    <h1>Tasks List</h1>
+    <div ng-controller="taskController as taskList">
+       <span>{{taskList.remaining()}} of {{taskList.tasks.length}} Tasks Remaining</span>
+
+       <ul>
+           <li ng-repeat="task in taskList.tasks">
+               <label class="checkbox">
+                  <input type="checkbox" ng:model="task.comp">
+                  <span class="task-done-{{task.comp}}" id="{{task.id}}">{{task.text}}</span>
+                   <a style="color:blue;font-size:10px" ng-click="taskList.delete(task)" title="Delete">X</a>
+                </label>
+            </li>
+        </ul>
+        <form ng-submit="taskList.addTask()">
+            <input type="text" ng:model="taskList.tasksText" placeholder="Add Task">
+            <input class="btn-primary" type="submit"  value="Add task">
+            <br>
+            <span style="color:red"  ng-if="taskList.flag == true">Task cannot Be Empty</span>
+       </form>
+    </div>
+
+    <div ng-controller="c2">
+        <!-- <div test-directive></div> -->
+        Two times <input ng-model="num"> equals {{ double(num)}} 
+    </div>
+
+    <div ng-controller="c3">
+        <h4>Value is:{{value}}</h4>
+        <button ng-click="inc()">Increase Value</button>
+        <button ng-click="dec()">Decrease Value</button>
+    </div>
+
+
+    <div ng-controller="c4">
+        <input ng-init="message='test'" ng-model='message'>
+        <button ng-click="call(message)">Click</button>
+    </div>
+
+    <div ng-controller="c5">
+         Hello {{name}}
+    </div>
+
+    <div ng-controller="c6">
+        <ul>
+            <li ng-repeat="name in names">{{name}} from {{title}}</li>
+        </ul>
+    </div>
+
+    <div ng-controller="c7">
+   
+        <ul>
+            <li ng-repeat="i in [1]" ng-controller="c7">
+                <button ng-click="$emit('Mevent')">$emit('Mevent')</button>
+                <button ng-click="$broadcast('Mevent')">$broadcast('Mevent')</button>
+                <br>
+                Middle scope event count: {{ count }}
+                {{count}}
+                <ul>
+                    <li ng-repeat="item in [1,2]" ng-controller="c7">
+                        leaf scope event count: {{count}}
+                    </li>
+                </ul>
+            </li>
+
+            <div>{{ 1234 | number:4}}</div>
+        </ul>
+    </div>
+
+    <div ng-controller="filt as ctrl">
+        {{name}}
+       <ul>
+           <li ng-repeat="item in ctrl.arr">{{item}}</li>
+       </ul>
+         <br>
+       <ul>
+            <h4>Filtered Array:</h4>
+            <li ng-repeat="item in ctrl.filteredArray">{{item}}</li>
+       </ul>
+    </div>
+
+   
+
+    <div ng-controller="c11">
+        <form  novalidate class="css-form">
+            <label>Name:<input type="text" ng-model="user.name" ng-model-options="{debounce: 500}" required></label><br>
+            <label>e-mail:<input type="email" ng-model="user.email" required    ></label><br>
+            <label>
+                <input type="checkbox" ng-model="user.agree" name="userAgree" required="" />
+                  I agree:
+                </label>
+                <input type="text" ng-show="user.agree"ng-model="user.agreeSign" required="">
+                <br>
+                <div ng-show="!user.agree || !user.agreeSign">Please Agree.</div>         
+            <input type="button" ng-click="reset()" value="Reset">
+            <input type="submit" ng-click="save(user)" value="Save">  
+            <input type="text" ng-model="size" name="size" min="0" max="10" integer />{{size}}
+            <span ng-show="form.size.$error.integer">The value is not integer</span>
+        </form>
+        <pre>user = {{user | json}}</pre>
+        <pre>master = {{master | json}}</pre><br>
+       
+
+        <my-customer info="t1"></my-customer>
+        <my-customer info="t2"></my-customer>
+    </div></div>
+
+    <div ng-controller="serviceController">
+        {{message}}
+    </div>
+
+    <div ng-controller="componentController as test">
+         <h2>Component Testing</h2>
+         <test-component hero="test.hero"></test-component>
+    </div>
+  </body>
+</html>
